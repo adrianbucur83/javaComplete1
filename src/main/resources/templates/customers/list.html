@@ -23,12 +23,12 @@
                 <input type="submit" value="Update" />
             </form>
         </td>
-        <td >
-            <form action="/mvc/customers/delete">
-                <input type="submit" value="Delete" />
-            </form>
+        <td>
+        <form action="/mvc/customers/delete" method="post">
+            <input type="hidden" th:value = "${customer.id}" name = "id"/>
+            <input type="submit" value="Delete" />
+        </form>
         </td>
-
     </tr>
 </table>
 
