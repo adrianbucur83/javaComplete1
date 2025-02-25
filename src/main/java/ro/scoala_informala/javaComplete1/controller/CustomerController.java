@@ -45,6 +45,14 @@ public class CustomerController {
 
     //TODO ADD DELETE CUSTOMER ENDPOINT
 
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable("id") Integer id) {
+        Customer customer = customerList.stream()
+                .filter(c -> c.getId() == id)
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Customer with id " + id + " does not exist"));
 
+        customerList.remove(customer);
+    }
 
 }
