@@ -4,13 +4,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ro.scoala_informala.javaComplete1.model.Customer;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
 @RequestMapping("/customers")
 public class CustomerController {
-    private List<Customer> customerList =  List.of(new Customer(15, "Popescu", null),
-            new Customer(16, "toni", null));
+//    private List<Customer> customerList = List.of(new Customer(15, "Popescu", null),
+//            new Customer(16, "toni", null));
+
+    private List<Customer> customerList = new ArrayList<>(Arrays.asList(new Customer(15, "Popescu", null), new Customer(16, "toni", null)));
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
@@ -44,7 +48,18 @@ public class CustomerController {
     }
 
     //TODO ADD DELETE CUSTOMER ENDPOINT
+    @GetMapping("/delete/{id}")
+    @ResponseBody
+    public String deleteCustomer(@PathVariable("id") Integer id) {
 
+        Customer customer = customerList.stream()
+                .filter(c -> c.getId() == id)
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Customer with id " + id + " does not exist"));
+
+        customerList.remove(customer);
+        return "Customer with id: " + id + " has been removed.";
+    }
 
 
 }
