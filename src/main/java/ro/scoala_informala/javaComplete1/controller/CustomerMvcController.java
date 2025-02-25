@@ -1,10 +1,12 @@
 package ro.scoala_informala.javaComplete1.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ro.scoala_informala.javaComplete1.model.Customer;
+import ro.scoala_informala.javaComplete1.service.CustomerService;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -12,70 +14,52 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/mvc/customers")
+@RequiredArgsConstructor
 public class CustomerMvcController {
-    private List<Customer> customerList =  new ArrayList<>();
 
-    public CustomerMvcController() {
-        customerList.addAll(List.of(new Customer(15, "Popescu", null),
-                new Customer(16, "toni", null)));
-    }
+    private final CustomerService customerService;
 
     @PostMapping
     public String createCustomer(@ModelAttribute Customer customer, Model model) {
-        customerList.add(customer);
-        //goes to the view
-        model.addAttribute("customerList", customerList);
+        customerService.createCustomer(customer);
+        model.addAttribute("customerList", customerService.getAllCustomers());
         model.addAttribute("date", LocalDate.now().toString());
         return "/customers/list";
     }
 
     @GetMapping()
     public String getAllCustomers(Model model) {
-        model.addAttribute("customerList", customerList);
+        model.addAttribute("customerList", customerService.getAllCustomers());
         model.addAttribute("date", LocalDate.now().toString());
         return "/customers/list";
     }
 
     @GetMapping("/create")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public String  getCreateCustomerForm() {
+    public String getCreateCustomerForm() {
         return "/customers/createCustomerForm";
     }
 
     @GetMapping("/{id}")
     public Customer getCustomerById(@PathVariable("id") Integer id) {
-        return customerList.stream()
-                .filter(customer -> customer.getId() == id)
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Customer with id " + id + " does not exist"));
+        return customerService.getCustomerById(id);
     }
 
     @GetMapping("/updateForm")
-    public String displayUpdateForm(Model model, @RequestParam("Id") String customerId){
+    public String displayUpdateForm(Model model, @RequestParam("Id") String customerId) {
         model.addAttribute("viewCustomerId", customerId);
         return "customers/updateCustomerForm";
-
     }
 
     @PostMapping("/update")
     public String updateCustomer(@RequestParam("id") Integer id, @RequestParam String newName) {
-        Customer customer = customerList.stream()
-                .filter(c -> c.getId() == id)
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Customer with id " + id + " does not exist"));
-
-        customer.setName(newName);
+        customerService.updateCustomer(id, newName);
         return "redirect:/mvc/customers";
     }
 
     @PostMapping("/delete")
-    public String deleteCustomer(@RequestParam("id") String id) {
-        Customer customer = customerList.stream()
-                .filter(c -> c.getId() == Integer.parseInt((id)))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Customer with id " + id + " does not exist"));
-
-       customerList.remove(customer);
+    public String deleteCustomer(@RequestParam("id") Integer id) {
+        customerService.deleteCustomer(id);
         return "redirect:/mvc/customers";
     }
 

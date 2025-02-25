@@ -3,13 +3,11 @@ package ro.scoala_informala.javaComplete1.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-
 @Controller
-public class MvcDemo {
+public class HomeController {
 
-    @GetMapping("/mvc")
-    public String getData(){
-        return "table";
+    @GetMapping("/")
+    public String getHome(){
+        return "redirect:/mvc/customers";
     }
-
 }

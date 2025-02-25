@@ -1,4 +1,4 @@
-package ro.scoala_informala.javaComplete1.controller;
+package ro.scoala_informala.javaComplete1.controller.api;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
