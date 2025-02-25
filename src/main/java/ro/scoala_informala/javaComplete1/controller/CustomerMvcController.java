@@ -51,7 +51,6 @@ public class CustomerMvcController {
     }
 
     @GetMapping("/updateForm")
-
     public String displayUpdateForm(Model model, @RequestParam("Id") String customerId){
         model.addAttribute("viewCustomerId", customerId);
         return "customers/updateCustomerForm";
@@ -67,7 +66,17 @@ public class CustomerMvcController {
 
         customer.setName(newName);
         return "redirect:/mvc/customers";
+    }
 
+    @PostMapping("/delete")
+    public String deleteCustomer(@RequestParam("id") String id) {
+        Customer customer = customerList.stream()
+                .filter(c -> c.getId() == Integer.parseInt((id)))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Customer with id " + id + " does not exist"));
+
+       customerList.remove(customer);
+        return "redirect:/mvc/customers";
     }
 
 
