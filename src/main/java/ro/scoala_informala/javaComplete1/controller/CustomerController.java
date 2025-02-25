@@ -52,7 +52,8 @@ public class CustomerController {
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Customer with id " + id + " does not exist"));
 
-        customerList.remove(customer);
+        System.out.println("my customer to delete: " + customer);
+        customerList.remove(id);
     }
 
 }
