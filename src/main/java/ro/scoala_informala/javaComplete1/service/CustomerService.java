@@ -1,49 +1,46 @@
 package ro.scoala_informala.javaComplete1.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ro.scoala_informala.javaComplete1.model.Customer;
+import ro.scoala_informala.javaComplete1.model.dto.CustomerReturnDto;
+import ro.scoala_informala.javaComplete1.repository.CustomerRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class CustomerService {
 
-    private List<Customer> customerList =  new ArrayList<>();
-    public CustomerService() {
-        customerList.addAll(List.of(new Customer(15, "Popescu", null),
-                new Customer(16, "toni", null)));
-    }
+    private final CustomerRepository customerRepository;
 
-    public List<Customer> getAllCustomers() {
-        return customerList;
+    public List<CustomerReturnDto> getAllCustomers() {
+        List<Customer> customersFromDatabase = customerRepository.findAll();
+        return customersFromDatabase.stream()
+                .map(CustomerReturnDto::mapFromCustomer)
+                .toList();
     }
 
     public void createCustomer(Customer customer) {
-        customerList.add(customer);
+        customerRepository.save(customer);
     }
 
-    public Customer getCustomerById(Integer id) {
-       return customerList.stream()
-                .filter(customer -> customer.getId() == id)
-                .findFirst()
+    public CustomerReturnDto getCustomerById(Integer id) {
+        Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Customer with id " + id + " does not exist"));
+        return CustomerReturnDto.mapFromCustomer(customer);
     }
 
-    public void updateCustomer(Integer id, String newName){
-        Customer customer = customerList.stream()
-                .filter(c -> c.getId() == id)
-                .findFirst()
+    public void updateCustomer(Integer id, String newName) {
+        Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Customer with id " + id + " does not exist"));
         customer.setName(newName);
+        customerRepository.save(customer);
     }
 
     public void deleteCustomer(Integer id) {
-        Customer customer = customerList.stream()
-                .filter(c -> c.getId() == id)
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Customer with id " + id + " does not exist"));
-        customerList.remove(customer);
+        getCustomerById(id);
+        customerRepository.deleteById(id);
     }
 
 

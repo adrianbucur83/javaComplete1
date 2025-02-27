@@ -6,11 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ro.scoala_informala.javaComplete1.model.Customer;
+import ro.scoala_informala.javaComplete1.model.dto.CustomerCreateDto;
 import ro.scoala_informala.javaComplete1.service.CustomerService;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping("/mvc/customers")
@@ -20,8 +19,8 @@ public class CustomerMvcController {
     private final CustomerService customerService;
 
     @PostMapping
-    public String createCustomer(@ModelAttribute Customer customer, Model model) {
-        customerService.createCustomer(customer);
+    public String createCustomer(@ModelAttribute CustomerCreateDto customerCreateDto, Model model) {
+        customerService.createCustomer(customerCreateDto.mapToCustomer());
         model.addAttribute("customerList", customerService.getAllCustomers());
         model.addAttribute("date", LocalDate.now().toString());
         return "/customers/list";
@@ -40,17 +39,13 @@ public class CustomerMvcController {
         return "/customers/createCustomerForm";
     }
 
-    @GetMapping("/{id}")
-    public Customer getCustomerById(@PathVariable("id") Integer id) {
-        return customerService.getCustomerById(id);
-    }
-
     @GetMapping("/updateForm")
     public String displayUpdateForm(Model model, @RequestParam("Id") String customerId) {
         model.addAttribute("viewCustomerId", customerId);
         return "customers/updateCustomerForm";
     }
 
+    //TODO create a CustomerUpdateDto with at least 2 updatable field
     @PostMapping("/update")
     public String updateCustomer(@RequestParam("id") Integer id, @RequestParam String newName) {
         customerService.updateCustomer(id, newName);

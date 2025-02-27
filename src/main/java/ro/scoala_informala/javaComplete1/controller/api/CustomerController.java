@@ -1,49 +1,51 @@
 package ro.scoala_informala.javaComplete1.controller.api;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ro.scoala_informala.javaComplete1.model.Customer;
+import ro.scoala_informala.javaComplete1.model.dto.CustomerReturnDto;
+import ro.scoala_informala.javaComplete1.service.CustomerService;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/customers")
+@RequiredArgsConstructor
 public class CustomerController {
-    private List<Customer> customerList =  List.of(new Customer(15, "Popescu", null),
-            new Customer(16, "toni", null));
+
+    private final CustomerService customerService;
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Customer createCustomer(@RequestBody Customer customer) {
-        // create in database the user
-        return customer;
+    public void createCustomer(@RequestBody Customer customer) {
+        customerService.createCustomer(customer);
     }
 
     @GetMapping
-    public List<Customer> getAllCustomers() {
-        return customerList;
+    public List<CustomerReturnDto> getAllCustomers() {
+        return customerService.getAllCustomers();
     }
 
     @GetMapping("/{id}")
-    public Customer getCustomerById(@PathVariable("id") Integer id) {
-        return customerList.stream()
-                .filter(customer -> customer.getId() == id)
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Customer with id " + id + " does not exist"));
+    public CustomerReturnDto getCustomerById(@PathVariable("id") Integer id) {
+        return customerService.getCustomerById(id);
     }
+
+    //TODO create a CustomerUpdateDto with at least 2 updatable field
 
     @PatchMapping("/{id}")
-    public Customer updateCustomer(@PathVariable("id") Integer id, @RequestParam String newName) {
-        Customer customer = customerList.stream()
-                .filter(c -> c.getId() == id)
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Customer with id " + id + " does not exist"));
-
-        customer.setName(newName);
-        return customer;
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateCustomer(@PathVariable("id") Integer id, @RequestParam String newName) {
+       customerService.updateCustomer(id, newName);
     }
 
-    //TODO ADD DELETE CUSTOMER ENDPOINT
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteCustomer(@PathVariable("id") Integer id) {
+        customerService.deleteCustomer(id);
+    }
+
 
 
 
