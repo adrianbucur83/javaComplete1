@@ -53,7 +53,7 @@ public class CustomerController {
                 .orElseThrow(() -> new RuntimeException("Customer with id " + id + " does not exist"));
 
         System.out.println("my customer to delete: " + customer);
-        customerList.remove(id);
+        customerList.remove(customer);
     }
 
 }
