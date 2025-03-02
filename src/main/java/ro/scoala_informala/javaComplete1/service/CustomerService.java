@@ -31,10 +31,11 @@ public class CustomerService {
         return CustomerReturnDto.mapFromCustomer(customer);
     }
 
-    public void updateCustomer(Integer id, String newName) {
+    public void updateCustomer(Integer id, String newName, String newPhoneNumber) {
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Customer with id " + id + " does not exist"));
         customer.setName(newName);
+        customer.setPhoneNumber(newPhoneNumber);
         customerRepository.save(customer);
     }
 
