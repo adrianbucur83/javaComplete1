@@ -1,9 +1,16 @@
 package ro.scoala_informala.javaComplete1.model.dto;
 
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import ro.scoala_informala.javaComplete1.model.Customer;
 
 public class CustomerCreateDto {
+    @NotNull
+    @Pattern(regexp = "[a-zA-Z]")
     private String name;
+    @NotNull
+    @Digits(integer = 10, fraction = 0)
     private String phoneNumber;
 
     public CustomerCreateDto(String name, String phoneNumber) {

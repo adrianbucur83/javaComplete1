@@ -1,9 +1,11 @@
 package ro.scoala_informala.javaComplete1.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ro.scoala_informala.javaComplete1.model.Customer;
 import ro.scoala_informala.javaComplete1.model.dto.CustomerCreateDto;
@@ -18,9 +20,19 @@ public class CustomerMvcController {
 
     private final CustomerService customerService;
 
+    @GetMapping("/create")
+    @ResponseStatus(value = HttpStatus.CREATED)
+    public String getCreateCustomerForm() {
+        return "/customers/createCustomerForm";
+    }
+
     @PostMapping
-    public String createCustomer(@ModelAttribute CustomerCreateDto customerCreateDto, Model model) {
+    public String createCustomer(@ModelAttribute @Valid CustomerCreateDto customerCreateDto, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "/customers/list";
+        }
         customerService.createCustomer(customerCreateDto.mapToCustomer());
+        model.addAttribute("customerCreateDto", customerCreateDto);
         model.addAttribute("customerList", customerService.getAllCustomers());
         model.addAttribute("date", LocalDate.now().toString());
         return "/customers/list";
@@ -31,12 +43,6 @@ public class CustomerMvcController {
         model.addAttribute("customerList", customerService.getAllCustomers());
         model.addAttribute("date", LocalDate.now().toString());
         return "/customers/list";
-    }
-
-    @GetMapping("/create")
-    @ResponseStatus(value = HttpStatus.CREATED)
-    public String getCreateCustomerForm() {
-        return "/customers/createCustomerForm";
     }
 
     @GetMapping("/updateForm")

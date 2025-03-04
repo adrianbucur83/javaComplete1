@@ -1,5 +1,6 @@
 package ro.scoala_informala.javaComplete1.controller.api;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class CustomerController {
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
-    public void createCustomer(@RequestBody CustomerCreateDto customerCreateDto) {
+    public void createCustomer(@RequestBody @Valid CustomerCreateDto customerCreateDto) {
         customerService.createCustomer(customerCreateDto.mapToCustomer());
     }
 
