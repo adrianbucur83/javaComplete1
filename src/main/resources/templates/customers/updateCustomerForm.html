@@ -1,16 +1,139 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update a Customer</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+            background-color: #f0f0f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 16px 48px rgba(0, 0, 0, 0.08);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 650px;
+            padding: 40px;
+            text-align: center;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .container:hover {
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.12), 0 24px 72px rgba(0, 0, 0, 0.08);
+        }
+
+        h2 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        p {
+            font-size: 20px;
+            color: #555;
+            margin-bottom: 36px;
+            font-weight: 400;
+            line-height: 1.6;
+            letter-spacing: 0.5px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 12px;
+            font-weight: 500;
+            text-align: left;
+            width: 100%;
+        }
+
+        input[type="text"], input[type="submit"] {
+            width: 100%;
+            padding: 14px;
+            margin: 12px 0;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            box-sizing: border-box;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"] {
+            background-color: #fafafa;
+            color: #333;
+        }
+
+        input[type="submit"] {
+            background-color: #007aff;
+            color: white;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #005f87;
+            transform: translateY(-2px);
+        }
+
+        input[type="submit"]:focus {
+            outline: none;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .container {
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
 <body>
 
-<h2>Update a customer</h2>
-<p th:text="'Updating user ' + ${viewCustomerId}"/>
+<div class="container">
+    <h2>Update a customer</h2>
+    <p th:text="'Actual user ID: ' + ${viewCustomerId}" style="font-size: 22px; font-weight: 600; color: #007aff;"></p>
 
-<form action="/mvc/customers/update" method="post">
-    <label for="newName">Customer name</label><br>
-    <input type="text" id="newName" name="newName"><br>
-    <input type="hidden" id="id" name="id" th:value = "${viewCustomerId}"><br>
-    <input type="submit" value="Submit">
-</form>
 
+    <form action="/mvc/customers/update" method="post">
+        <input type="text" id="newName" name="newName" placeholder="Enter new customer name"  required>
+        <input type="hidden" id="id" name="id" th:value="${viewCustomerId}" class="hidden">
+        <input type="submit" value="Submit">
+    </form>
+</div>
 </body>
 </html>

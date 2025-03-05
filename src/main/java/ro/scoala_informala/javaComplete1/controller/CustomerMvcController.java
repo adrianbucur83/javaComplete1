@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ro.scoala_informala.javaComplete1.model.Customer;
 import ro.scoala_informala.javaComplete1.model.dto.CustomerCreateDto;
+import ro.scoala_informala.javaComplete1.model.dto.CustomerReturnDto;
 import ro.scoala_informala.javaComplete1.service.CustomerService;
 
 import java.time.LocalDate;
@@ -51,7 +52,7 @@ public class CustomerMvcController {
         return "customers/updateCustomerForm";
     }
 
-    //TODO create a CustomerUpdateDto with at least 2 updatable field
+
     @PostMapping("/update")
     public String updateCustomer(@RequestParam("id") Integer id, @RequestParam String newName) {
         customerService.updateCustomer(id, newName);
