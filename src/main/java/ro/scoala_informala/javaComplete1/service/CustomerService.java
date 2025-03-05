@@ -2,6 +2,7 @@ package ro.scoala_informala.javaComplete1.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ro.scoala_informala.javaComplete1.exception.BusinessException;
 import ro.scoala_informala.javaComplete1.model.Customer;
 import ro.scoala_informala.javaComplete1.model.dto.CustomerReturnDto;
 import ro.scoala_informala.javaComplete1.repository.CustomerRepository;
@@ -27,13 +28,13 @@ public class CustomerService {
 
     public CustomerReturnDto getCustomerById(Integer id) {
         Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Customer with id " + id + " does not exist"));
+                .orElseThrow(() -> new BusinessException("Customer with id " + id + " does not exist"));
         return CustomerReturnDto.mapFromCustomer(customer);
     }
 
     public void updateCustomer(Integer id, String newName) {
         Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Customer with id " + id + " does not exist"));
+                .orElseThrow(() -> new BusinessException("Customer with id " + id + " does not exist"));
         customer.setName(newName);
         customerRepository.save(customer);
     }

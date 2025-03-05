@@ -22,17 +22,17 @@ public class CustomerMvcController {
 
     @GetMapping("/create")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public String getCreateCustomerForm() {
+    public String getCreateCustomerForm(Model model) {
+        model.addAttribute("customerCreateDto", new CustomerCreateDto());
         return "/customers/createCustomerForm";
     }
 
     @PostMapping
     public String createCustomer(@ModelAttribute @Valid CustomerCreateDto customerCreateDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            return "/customers/list";
+            return "/customers/createCustomerForm";
         }
         customerService.createCustomer(customerCreateDto.mapToCustomer());
-        model.addAttribute("customerCreateDto", customerCreateDto);
         model.addAttribute("customerList", customerService.getAllCustomers());
         model.addAttribute("date", LocalDate.now().toString());
         return "/customers/list";

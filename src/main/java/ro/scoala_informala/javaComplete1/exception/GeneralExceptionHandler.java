@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.util.List;
 
 @ControllerAdvice
-public class ValidationExceptionHandler {
+public class GeneralExceptionHandler {
 
     @ExceptionHandler(value = {MethodArgumentNotValidException.class})
     protected ResponseEntity<Object> handleConflict(
@@ -32,8 +32,10 @@ public class ValidationExceptionHandler {
                 .toList();
         validationErrorResponse.setErrorList(errorList);
 
-
         return new ResponseEntity(validationErrorResponse, ex.getStatusCode());
     }
+
+//    @ExceptionHandler(value = BusinessException.class)
+
 
 }

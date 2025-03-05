@@ -3,8 +3,12 @@ package ro.scoala_informala.javaComplete1.model.dto;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import ro.scoala_informala.javaComplete1.model.Customer;
 
+@Getter
+@NoArgsConstructor
 public class CustomerCreateDto {
     @NotNull
     @Pattern(regexp = "[a-zA-Z]")
