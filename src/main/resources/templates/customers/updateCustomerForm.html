@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <body>
 
 <h2>Update a customer</h2>
@@ -7,7 +7,11 @@
 
 <form action="/mvc/customers/update" method="post">
     <label for="newName">Customer name</label><br>
-    <input type="text" id="newName" name="newName"><br>
+    <input type="text" id="newName" name="newName" th:value = "${customer.getName}"><br>
+
+    <label for="newPhoneNumber">Customer phone number</label><br>
+    <input type="text" id="newPhoneNumber" phone number="newPhoneNumber" th:value = "${customer.getPhoneNumber}"><br>
+
     <input type="hidden" id="id" name="id" th:value = "${viewCustomerId}"><br>
     <input type="submit" value="Submit">
 </form>

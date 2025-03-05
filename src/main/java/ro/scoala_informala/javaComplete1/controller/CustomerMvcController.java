@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ro.scoala_informala.javaComplete1.model.Customer;
 import ro.scoala_informala.javaComplete1.model.dto.CustomerCreateDto;
+import ro.scoala_informala.javaComplete1.model.dto.CustomerUpdateDto;
 import ro.scoala_informala.javaComplete1.service.CustomerService;
 
 import java.time.LocalDate;
@@ -47,8 +48,8 @@ public class CustomerMvcController {
 
     //TODO create a CustomerUpdateDto with at least 2 updatable field
     @PostMapping("/update")
-    public String updateCustomer(@RequestParam("id") Integer id, @RequestParam String newName) {
-        customerService.updateCustomer(id, newName);
+    public String updateCustomer(@RequestParam("id") Integer id, @ModelAttribute CustomerUpdateDto customerUpdateDto) {
+        customerService.updateCustomer(id, customerUpdateDto);
         return "redirect:/mvc/customers";
     }
 
