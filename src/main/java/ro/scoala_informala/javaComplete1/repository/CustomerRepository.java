@@ -12,14 +12,14 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
     // findAll
 
-    List<Customer> findByPhoneNumber(String phoneNumber);
-    List<Customer> findByPhoneNumberIn(List<String> phoneNumbers);
-    void deleteByName(String name);
-
-    @Query(nativeQuery = true, value = "SELECT * FROM customers")
-    List<Customer> myCustomQuery();
-
-    @Query(nativeQuery = false, value = "SELECT Customer c")
-    List<Customer> myCustomHqlQuery();
+//    List<Customer> findByPhoneNumber(String phoneNumber);
+//    List<Customer> findByPhoneNumberIn(List<String> phoneNumbers);
+//    void deleteByName(String name);
+//
+//    @Query(nativeQuery = true, value = "SELECT * FROM customers")
+//    List<Customer> myCustomQuery();
+//
+//    @Query(nativeQuery = false, value = "SELECT Customer c")
+//    List<Customer> myCustomHqlQuery();
 
 }
