@@ -52,7 +52,7 @@ public class CustomerMvcController {
         return "customers/updateCustomerForm";
     }
 
-
+    //TODO create a CustomerUpdateDto with at least 2 updatable field
     @PostMapping("/update")
     public String updateCustomer(@RequestParam("id") Integer id, @RequestParam String newName) {
         customerService.updateCustomer(id, newName);
