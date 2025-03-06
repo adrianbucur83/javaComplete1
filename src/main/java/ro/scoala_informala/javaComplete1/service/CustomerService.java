@@ -37,12 +37,8 @@ public class CustomerService {
                 .orElseThrow(() -> new RuntimeException("Customer with id " + id + " does not exist"));
         // putem aici oare sa ne folosim de getCustomerById() ?
 
-		if (customerUpdateDto.getName() != null) {
-            customer.setName(customerUpdateDto.getName());
-        }
-        if (customerUpdateDto.getPhoneNumber() != null) {
-            customer.setPhoneNumber(customerUpdateDto.getPhoneNumber());
-        }
+        customer.setName(customerUpdateDto.getName());
+        customer.setPhoneNumber(customerUpdateDto.getPhoneNumber());
 
         customerRepository.save(customer);
     }

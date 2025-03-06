@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <body>
 
 <h2>Update a customer</h2>
 <p th:text="'Updating user ' + ${viewCustomerId}"/>
 
 <form action="/mvc/customers/update" method="post">
-    <label for="newName">Customer name</label><br>
-    <input type="text" id="newName" name="newName" th:value = "${customer.getName}"><br>
+  <label for="name">Customer name</label><br>
+  <input type="text" id="name" name="name"><br>
 
-    <label for="newPhoneNumber">Customer phone number</label><br>
-    <input type="text" id="newPhoneNumber" phone number="newPhoneNumber" th:value = "${customer.getPhoneNumber}"><br>
+  <label for="phoneNumber">Customer phone number</label><br>
+  <input type="text" id="phoneNumber" name="phoneNumber"><br>
 
-    <input type="hidden" id="id" name="id" th:value = "${viewCustomerId}"><br>
-    <input type="submit" value="Submit">
+  <input type="hidden" id="id" name="id" th:value = "${viewCustomerId}"><br>
+  <input type="submit" value="Submit">
 </form>
 
 </body>

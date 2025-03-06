@@ -38,8 +38,8 @@ public class CustomerController {
 
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateCustomer(@PathVariable("id") Integer id, CustomerUpdateDto customerUpdateDto) {
-       customerService.updateCustomer(id, customerUpdateDto);
+    public void updateCustomer(@PathVariable("id") Integer id, @RequestBody CustomerUpdateDto customerUpdateDto) {
+        customerService.updateCustomer(id, customerUpdateDto);
     }
 
     @DeleteMapping("/{id}")
