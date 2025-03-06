@@ -1,5 +1,6 @@
 package ro.scoala_informala.javaComplete1.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,7 @@ public class CustomerMvcController {
     }
 
     @PostMapping
-    public String createCustomer(@ModelAttribute @Valid CustomerCreateDto customerCreateDto, BindingResult bindingResult, Model model) {
+    public String createCustomer(@ModelAttribute @Valid CustomerCreateDto customerCreateDto, BindingResult bindingResult, Model model, HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
             return "/customers/createCustomerForm";
         }

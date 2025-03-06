@@ -8,14 +8,14 @@
 
 <h2>Create a new customer</h2>
 
-<form action="/mvc/customers" method="post" class="w-25">
+<form action="/mvc/customers" method="post" class="w-25" th:object="${customerCreateDto}">
     <label for="name">Customer name</label><br>
-    <input type="text" id="name" name="name" class="form-control bg-dark text-white text-start"><br>
-    <p th:if="${#fields.hasErrors('customerCreateDto.name')}" style="color:red"> Invalid name</p>
+    <input type="text" id="name" th:field="*{name}" class="form-control" placeholder="Enter customer name" required>
+    <p th:if="${#fields.hasErrors('name')}" style="color:red"> Invalid name</p>
 
     <label for="phoneNumber">Phone number</label><br>
-    <input type="text" id="phoneNumber" name="phoneNumber" class="form-control bg-dark text-white text-start"><br>
-    <p th:if="${#fields.hasErrors('customerCreateDto.phoneNumber')}" style="color:red"> Invalid phone number</p>
+    <input type="text" id="phoneNumber" th:field="*{phoneNumber}" class="form-control" placeholder="Enter phone number" required>
+    <p th:if="${#fields.hasErrors('phoneNumber')}" style="color:red"> Invalid phone number</p>
 
 
     <input type="submit" value="Submit" class="btn-primary">
