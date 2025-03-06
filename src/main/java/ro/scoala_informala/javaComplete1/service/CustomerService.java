@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ro.scoala_informala.javaComplete1.model.Customer;
 import ro.scoala_informala.javaComplete1.model.dto.CustomerReturnDto;
+import ro.scoala_informala.javaComplete1.model.dto.CustomerUpdateDto;
 import ro.scoala_informala.javaComplete1.repository.CustomerRepository;
 
 import java.util.List;
@@ -31,10 +32,10 @@ public class CustomerService {
         return CustomerReturnDto.mapFromCustomer(customer);
     }
 
-    public void updateCustomer(Integer id, String newName) {
+    public void updateCustomer(Integer id, CustomerUpdateDto customerUpdateDto) {
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Customer with id " + id + " does not exist"));
-        customer.setName(newName);
+        customer.setName((customerUpdateDto.getNewName()));
         customerRepository.save(customer);
     }
 

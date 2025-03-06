@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import ro.scoala_informala.javaComplete1.model.Customer;
 import ro.scoala_informala.javaComplete1.model.dto.CustomerCreateDto;
 import ro.scoala_informala.javaComplete1.model.dto.CustomerReturnDto;
+import ro.scoala_informala.javaComplete1.model.dto.CustomerUpdateDto;
 import ro.scoala_informala.javaComplete1.service.CustomerService;
 
 import java.util.List;
@@ -33,12 +34,11 @@ public class CustomerController {
         return customerService.getCustomerById(id);
     }
 
-    //TODO create a CustomerUpdateDto with at least 2 updatable field
 
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateCustomer(@PathVariable("id") Integer id, @RequestParam String newName) {
-       customerService.updateCustomer(id, newName);
+    public void updateCustomerDto(@PathVariable Integer id, @RequestBody CustomerUpdateDto customerUpdateDto) {
+       customerService.updateCustomer(id, customerUpdateDto);
     }
 
     @DeleteMapping("/{id}")
