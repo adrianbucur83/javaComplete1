@@ -36,7 +36,7 @@ public class CustomerMvcController {
         customerService.createCustomer(customerCreateDto.mapToCustomer());
         model.addAttribute("customerList", customerService.getAllCustomers());
         model.addAttribute("date", LocalDate.now().toString());
-        return "/customers/list";
+        return "redirect:/mvc/customers";
     }
 
     @GetMapping()
