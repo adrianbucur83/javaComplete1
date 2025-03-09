@@ -29,9 +29,11 @@ public class CustomerMvcController {
 
     @PostMapping
     public String createCustomer(@ModelAttribute @Valid CustomerCreateDto customerCreateDto, BindingResult bindingResult, Model model) {
+        System.out.println("ugabuga");
         if (bindingResult.hasErrors()) {
             return "/customers/createCustomerForm";
         }
+
         customerService.createCustomer(customerCreateDto.mapToCustomer());
         model.addAttribute("customerList", customerService.getAllCustomers());
         model.addAttribute("date", LocalDate.now().toString());

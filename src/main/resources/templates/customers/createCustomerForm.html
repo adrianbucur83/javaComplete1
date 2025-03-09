@@ -10,11 +10,11 @@
 
 <form action="/mvc/customers" method="post" class="w-25">
     <label for="name">Customer name</label><br>
-    <input type="text" id="name" name="name" class="form-control bg-dark text-white text-start"><br>
+    <input type="text" id="name" th:field="*{customerCreateDto.name}" class="form-control bg-dark text-white text-start"><br>
     <p th:if="${#fields.hasErrors('customerCreateDto.name')}" style="color:red"> Invalid name</p>
 
     <label for="phoneNumber">Phone number</label><br>
-    <input type="text" id="phoneNumber" name="phoneNumber" class="form-control bg-dark text-white text-start"><br>
+    <input type="text" id="phoneNumber" th:field="*{customerCreateDto.phoneNumber}" class="form-control bg-dark text-white text-start"><br>
     <p th:if="${#fields.hasErrors('customerCreateDto.phoneNumber')}" style="color:red"> Invalid phone number</p>
 
 
