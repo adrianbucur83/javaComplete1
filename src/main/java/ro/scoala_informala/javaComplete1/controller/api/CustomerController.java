@@ -1,11 +1,12 @@
 package ro.scoala_informala.javaComplete1.controller.api;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import ro.scoala_informala.javaComplete1.model.Customer;
 import ro.scoala_informala.javaComplete1.model.dto.CustomerCreateDto;
 import ro.scoala_informala.javaComplete1.model.dto.CustomerReturnDto;
-import ro.scoala_informala.javaComplete1.model.dto.CustomerUpdateDto;
 import ro.scoala_informala.javaComplete1.service.CustomerService;
 
 import java.util.List;
@@ -17,17 +18,14 @@ public class CustomerController {
 
     private final CustomerService customerService;
 
-
     @PostMapping
-    @ResponseStatus(value = HttpStatus.CREATED) //response status 201
-    public void createCustomer(@RequestBody CustomerCreateDto customerCreateDto) {
-        // create in database the user
+    @ResponseStatus(value = HttpStatus.CREATED)
+    public void createCustomer(@RequestBody @Valid CustomerCreateDto customerCreateDto) {
         customerService.createCustomer(customerCreateDto.mapToCustomer());
     }
 
     @GetMapping
     public List<CustomerReturnDto> getAllCustomers() {
-
         return customerService.getAllCustomers();
     }
 
@@ -36,25 +34,21 @@ public class CustomerController {
         return customerService.getCustomerById(id);
     }
 
+    //TODO create a CustomerUpdateDto with at least 2 updatable field
 
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public CustomerUpdateDto updateCustomer(@PathVariable("id") Integer id, @RequestBody CustomerUpdateDto dto) {
-        CustomerUpdateDto updatedDto;
-        updatedDto = customerService.updateCustomer(id, dto.getName(), dto.getPhoneNumber());
-        return updatedDto;
+    public void updateCustomer(@PathVariable("id") Integer id, @RequestParam String newName) {
+       customerService.updateCustomer(id, newName);
     }
-
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteCustomerById(@PathVariable("id") Integer id) {
+    public void deleteCustomer(@PathVariable("id") Integer id) {
         customerService.deleteCustomer(id);
     }
+
+
+
+
 }
-
-
-
-
-
-

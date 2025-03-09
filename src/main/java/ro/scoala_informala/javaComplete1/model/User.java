@@ -3,14 +3,15 @@ package ro.scoala_informala.javaComplete1.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Data
 @Entity
-@Table(name = "products")
-public class Product {
+@Table(name = "users")
+@Data
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
-    private double price;
-
+    private String username;
+    private String password;
+    private boolean isActive;
+    private String role;
 }

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Update a customer</h2>
+<p th:text="'Updating user ' + ${viewCustomerId}"/>
+
+<form action="/mvc/customers/update" method="post">
+    <label for="newName">Customer name</label><br>
+    <input type="text" id="newName" name="newName"><br>
+    <input type="hidden" id="id" name="id" th:value = "${viewCustomerId}"><br>
+    <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>
