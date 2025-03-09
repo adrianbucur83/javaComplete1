@@ -32,28 +32,21 @@ public class CustomerService {
         return CustomerReturnDto.mapFromCustomer(customer);
     }
 
-  public CustomerUpdateDto updateCustomer(Integer id, String newName, String newPhoneNumber) {
-      return customerRepository.findById(id)
-              .map(customer -> {
-                  CustomerUpdateDto updatedDto = CustomerUpdateDto.updateCustomerDto(customer, newName, newPhoneNumber);
-                  customer.setName(updatedDto.getName());
-                  customer.setPhoneNumber(updatedDto.getPhoneNumber());
-                  customerRepository.save(customer);
-                  return updatedDto;
-              })
-              .orElseThrow(() -> new RuntimeException("Customer with id " + id + " does not exist"));
-  }
-
-
-/*
-    public void updateCustomer(Integer id, String newName) {
-        Customer customer = customerRepository.findById(id).
-                orElseThrow(() -> new RuntimeException("Customer with id " + id + " does not exist"));
-        customerRepository.save(customer);
+    public CustomerUpdateDto updateCustomer(Integer id, String newName, String newPhoneNumber) {
+        return customerRepository.findById(id)
+                .map(customer -> {
+                    CustomerUpdateDto updatedDto = CustomerUpdateDto.updateCustomerDto(customer, newName, newPhoneNumber);
+                    customer.setName(updatedDto.getName());
+                    customer.setPhoneNumber(updatedDto.getPhoneNumber());
+                    customerRepository.save(customer);
+                    return updatedDto;
+                })
+                .orElseThrow(() -> new RuntimeException("Customer with id " + id + " does not exist"));
     }
 
-*/    public void deleteCustomer(Integer id) {
-        getCustomerById(id); //verificam daca exista inainte sa il stergem
+
+    public void deleteCustomer(Integer id) {
+        getCustomerById(id);                             //verificam daca exista inainte sa il stergem
         customerRepository.deleteById(id);
     }
 }
