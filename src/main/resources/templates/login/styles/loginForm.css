@@ -1,0 +1,54 @@
+       body {
+          font-family: Arial;
+        }
+
+        form {
+          border: 3px solid white;
+        }
+
+        input[type=text],
+        input[type=password] {
+          width: 50%;
+          padding: 12px 20px;
+          margin: 8px 8px;
+          display: inline-block;
+          border: 1px solid #ccc;
+          box-sizing: border-box;
+        }
+
+        button {
+          background-color: #07a76c;
+          color: white;
+          padding: 14px 20px;
+          margin: 15px 0;
+          margin-left: 90px;
+          border: none;
+          cursor: pointer;
+          width: 50%;
+          border-radius: 10px;
+          transition: box-shadow 0.15;
+        }
+
+        button:hover {
+          opacity: 0.8;
+          box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.20);
+        }
+
+        .cancelbtn {
+          width: auto;
+          padding: 10px 18px;
+          background-color: #f44336;
+          border-radius: 10px;
+          cursor: pointer;
+        }
+
+        .container {
+          padding: 16px;
+        }
+
+        .login-form {
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          width: 40%;
+        }
