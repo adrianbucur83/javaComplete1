@@ -1,0 +1,53 @@
+        .text-login {
+          font-family: Arial;
+          font-size: 25px;
+          font-weight: bold;
+          color: black;
+          background-color: aquamarine;
+          padding-left: 10px;
+          padding-right: 10px;
+          padding-top: 20px;
+          padding-bottom: 20px;
+          text-align: center;
+          margin-top: 30px;
+          margin-left: 400px;
+          margin-right: 400px;
+          margin-bottom: 0px;
+          border-radius: 50px;
+        }
+
+        .arrow-sign {
+          color: black;
+          padding-left: 10px;
+          padding-right: 10px;
+          padding-top: 0px;
+          padding-bottom: 20px;
+          text-align: center;
+          margin-top: 0px;
+          margin-left: 400px;
+          margin-right: 400px;
+
+        }
+
+        .login-link {
+          font-family: Arial;
+          font-size: 50px;
+          color: red;
+          font-weight: bold;
+          padding-left: 20px;
+          padding-right: 20px;
+          padding-top: 20px;
+          padding-bottom: 20px;
+          text-align: center;
+          margin-top: 0px;
+          margin-left: 630px;
+          margin-right: 550px;
+          background-color: green;
+          border-radius: 50px;
+          cursor: pointer;
+        }
+
+        .login-link:active {
+          background-color: blue;
+
+        }

@@ -1,0 +1,62 @@
+
+        .update-text {
+          font-family: Arial;
+          font-size: 25px;
+          font-weight: bold;
+          color: black;
+          background-color: aquamarine;
+          padding-left: 10px;
+          padding-right: 10px;
+          padding-top: 20px;
+          padding-bottom: 20px;
+          text-align: center;
+          margin-top: 30px;
+          margin-left: 400px;
+          margin-right: 400px;
+          margin-bottom: 0px;
+          border-radius: 50px;
+
+        }
+
+        .submit-button {
+          color: black;
+          padding-left: 20px;
+          padding-right: 20px;
+          padding-top: 10px;
+          padding-bottom: 20px;
+          text-align: center;
+          margin-top: 0px;
+          margin-left: 700px;
+          margin-right: 400px;
+          border-radius: 15px;
+          cursor: pointer;
+
+        }
+
+        .customer-name {
+          font-family: Arial;
+          font-size: 15px;
+          font-weight: bold;
+          color: rgb(17, 4, 197);
+          padding-left: 10px;
+          padding-right: 10px;
+          padding-top: 0px;
+          padding-bottom: 20px;
+          text-align: center;
+          margin-top: 0px;
+          margin-left: 640px;
+          margin-right: 400px;
+
+        }
+
+        .customer-table {
+          padding-left: 10px;
+          padding-right: 10px;
+          padding-top: 0px;
+          padding-bottom: 20px;
+          margin-top: 0px;
+          margin-left: 650px;
+          margin-right: 400px;
+          margin-bottom: 0px;
+
+        }

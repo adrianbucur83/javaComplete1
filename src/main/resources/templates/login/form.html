@@ -1,16 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
+<head>
+
+    <title>Login Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles/loginForm.css">
+</head>
+
 <body>
 
-<h2>Text input fields</h2>
+<h2 class="login-form">Login Form</h2>
 
-<form action="/login/access" method="post">
-    <label for="username">Username</label><br>
-    <input type="text" id="username" name="username"><br>
-    <label for="password">Password:</label><br>
-    <input type="password" id="password" name="password">
-    <input type="submit" value="Submit">
+<div class="container">
+    <form action="/login/acces" method="post">
+        <label for="username"><b>Username:</b></label>
+        <input type="text" id="username" name="username">
+        <p></p>
+        <label for="password"><b>Password:</b></label>
+        <input type="password" id="password" name="password">
+
+        <button type="submit">Login</button>
+        <label>
+            <input type="checkbox" checked="checked" name="remember"> Remember me
+        </label>
+    </form>
+</div>
+
+<div class="container" style="background-color:white">
+    <button type="button" class="cancelbtn">Cancel</button>
+</div>
 </form>
 
 </body>
+
 </html>
