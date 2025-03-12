@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html>
-<body>
 
-<h2>Update a customer</h2>
-<p th:text="'Updating user ' + ${viewCustomerId}"/>
+<head>
+    <link rel="stylesheet" href="stylesCustomer/updateCustomerForm.css">
+</head>
+
+<body>
+<h2 class="update-text">Update a customer</h2>
+<p th:text="'Updating user ' + ${viewCustomerId}" />
 
 <form action="/mvc/customers/update" method="post">
-    <label for="newName">Customer name</label><br>
-    <input type="text" id="newName" name="newName"><br>
-    <input type="hidden" id="id" name="id" th:value = "${viewCustomerId}"><br>
-    <input type="submit" value="Submit">
+    <label class="customer-name" for="newName">Customer name</label><br>
+    <input class="customer-table" type="text" id="newName" name="newName"><br>
+    <input type="hidden" id="id" name="id" th:value="${viewCustomerId}"><br>
+    <input class="submit-button" type="submit" value="Submit">
 </form>
 
 </body>
