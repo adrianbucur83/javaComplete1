@@ -18,16 +18,20 @@ public class CustomerCreateDto {
     @NotNull
     @Digits(integer = 10, fraction = 0)
     private String phoneNumber;
+    private String prefix;
 
-    public CustomerCreateDto(String name, String phoneNumber) {
+
+    public CustomerCreateDto(String name, String phoneNumber, String prefix) {
         this.name = name;
         this.phoneNumber = phoneNumber;
+        this.prefix = prefix;
     }
 
     public Customer mapToCustomer() {
         Customer customer = new Customer();
         customer.setName(name);
         customer.setPhoneNumber(phoneNumber);
+        customer.setPrefix(prefix);
         return customer;
     }
 

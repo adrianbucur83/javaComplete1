@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import ro.scoala_informala.javaComplete1.model.Customer;
 import ro.scoala_informala.javaComplete1.model.dto.CustomerCreateDto;
 import ro.scoala_informala.javaComplete1.service.CustomerService;
+import ro.scoala_informala.javaComplete1.service.PrefixService;
 
 import java.time.LocalDate;
 
@@ -20,11 +21,13 @@ import java.time.LocalDate;
 public class CustomerMvcController {
 
     private final CustomerService customerService;
+    private final PrefixService prefixService;
 
     @GetMapping("/create")
     @ResponseStatus(value = HttpStatus.CREATED)
     public String getCreateCustomerForm(Model model) {
         model.addAttribute("customerCreateDto", new CustomerCreateDto());
+        model.addAttribute("prefixes", prefixService.getAllPrefixes());
         return "/customers/createCustomerForm";
     }
 
