@@ -21,6 +21,11 @@ public class CustomerMvcController {
 
     private final CustomerService customerService;
 
+    @GetMapping("/login")
+    public String login(){
+        return "/login/loginForm";
+    }
+
     @GetMapping("/create")
     @ResponseStatus(value = HttpStatus.CREATED)
     public String getCreateCustomerForm(Model model) {

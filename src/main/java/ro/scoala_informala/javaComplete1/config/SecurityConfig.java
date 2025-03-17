@@ -37,7 +37,11 @@ public class SecurityConfig {
         http
                 .csrf(c -> c.disable())
                 .httpBasic(Customizer.withDefaults())
-                .formLogin(Customizer.withDefaults())
+                .formLogin(form -> form
+                        .loginPage("/mvc/customers/login")
+                        .loginProcessingUrl("/mvc/customers/login")
+                        .defaultSuccessUrl("/mvc/customers", true)
+                        .permitAll())
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/mvc/customers").permitAll()
                         .requestMatchers("/mvc/customers/delete").hasRole("ADMIN")
