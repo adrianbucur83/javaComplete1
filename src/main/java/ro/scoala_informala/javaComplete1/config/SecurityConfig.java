@@ -40,6 +40,9 @@ public class SecurityConfig {
                 .formLogin(Customizer.withDefaults())
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/mvc/customers").permitAll()
+                        .requestMatchers("/actuator/**").permitAll()
+                        .requestMatchers("/v3/api-docs/**").permitAll()
+                        .requestMatchers("/swagger-ui/**").permitAll()
                         .requestMatchers("/mvc/customers/delete").hasRole("ADMIN")
                         .requestMatchers("/mvc/customers/update").hasRole("ADMIN")
                         .anyRequest().authenticated()
