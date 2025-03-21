@@ -2,14 +2,13 @@ package ro.scoala_informala.javaComplete1.controller.api;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import ro.scoala_informala.javaComplete1.model.Customer;
 import ro.scoala_informala.javaComplete1.model.dto.CustomerCreateDto;
 import ro.scoala_informala.javaComplete1.model.dto.CustomerReturnDto;
 import ro.scoala_informala.javaComplete1.service.CustomerService;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/customers")
@@ -25,8 +24,8 @@ public class CustomerController {
     }
 
     @GetMapping
-    public List<CustomerReturnDto> getAllCustomers() {
-        return customerService.getAllCustomers();
+    public Page<CustomerReturnDto> getAllCustomers(Pageable pageable) {
+        return customerService.getAllCustomers(pageable);
     }
 
     @GetMapping("/{id}")

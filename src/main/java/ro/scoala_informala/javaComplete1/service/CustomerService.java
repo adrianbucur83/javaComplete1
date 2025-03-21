@@ -1,6 +1,10 @@
 package ro.scoala_informala.javaComplete1.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ro.scoala_informala.javaComplete1.exception.BusinessException;
 import ro.scoala_informala.javaComplete1.model.Customer;
@@ -20,6 +24,11 @@ public class CustomerService {
         return customersFromDatabase.stream()
                 .map(CustomerReturnDto::mapFromCustomer)
                 .toList();
+    }
+
+    public Page<CustomerReturnDto> getAllCustomers(Pageable pageable) {
+        Page<Customer> customersFromDatabase = customerRepository.findAll(pageable);
+        return customersFromDatabase.map(CustomerReturnDto::mapFromCustomer);
     }
 
     public void createCustomer(Customer customer) {
