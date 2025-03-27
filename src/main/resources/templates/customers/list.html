@@ -17,6 +17,7 @@
             <tr class="table-ligh">
                 <th>Id</th>
                 <th>Customer name</th>
+                <th>Prefix</th>
                 <th>Phone number</th>
                 <th>Update</th>
                 <th>Delete</th>
@@ -26,6 +27,7 @@
             <tr th:each="customer: ${customerList}">
                 <td th:text="${customer.id}" />
                 <td th:text="${customer.name}" />
+                <td th:text="${customer.prefix}" />
                 <td th:text="${customer.phoneNumber}" />
                 <td >
                     <form action="/mvc/customers/updateForm">

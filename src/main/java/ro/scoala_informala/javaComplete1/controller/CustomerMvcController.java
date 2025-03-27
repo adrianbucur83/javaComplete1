@@ -1,5 +1,6 @@
 package ro.scoala_informala.javaComplete1.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import ro.scoala_informala.javaComplete1.model.Customer;
 import ro.scoala_informala.javaComplete1.model.dto.CustomerCreateDto;
 import ro.scoala_informala.javaComplete1.service.CustomerService;
+import ro.scoala_informala.javaComplete1.service.PrefixService;
 
 import java.time.LocalDate;
 
@@ -19,21 +21,21 @@ import java.time.LocalDate;
 public class CustomerMvcController {
 
     private final CustomerService customerService;
+    private final PrefixService prefixService;
 
     @GetMapping("/create")
     @ResponseStatus(value = HttpStatus.CREATED)
     public String getCreateCustomerForm(Model model) {
         model.addAttribute("customerCreateDto", new CustomerCreateDto());
+        model.addAttribute("prefixes", prefixService.getAllPrefixes());
         return "/customers/createCustomerForm";
     }
 
     @PostMapping
-    public String createCustomer(@ModelAttribute @Valid CustomerCreateDto customerCreateDto, BindingResult bindingResult, Model model) {
-        System.out.println("ugabuga");
+    public String createCustomer(@ModelAttribute @Valid CustomerCreateDto customerCreateDto, BindingResult bindingResult, Model model, HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
             return "/customers/createCustomerForm";
         }
-
         customerService.createCustomer(customerCreateDto.mapToCustomer());
         model.addAttribute("customerList", customerService.getAllCustomers());
         model.addAttribute("date", LocalDate.now().toString());

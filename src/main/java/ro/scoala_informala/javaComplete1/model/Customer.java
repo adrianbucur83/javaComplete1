@@ -17,8 +17,8 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+    private String prefix;
     private String phoneNumber;
-    private String password;
     @OneToMany
     private List<Order> orderList;
 
