@@ -9,6 +9,7 @@ import lombok.Setter;
 import ro.scoala_informala.javaComplete1.model.Customer;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @Setter
 public class CustomerCreateDto {
