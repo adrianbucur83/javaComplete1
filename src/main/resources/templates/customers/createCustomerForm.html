@@ -13,10 +13,10 @@
 
         <h4 style="margin: 30px 0; text-align: center;">Create a new customer</h4>
 
-        <form action="/mvc/customers" method="post">
+        <form action="/mvc/customers" method="post" th:object="${customerCreateDto}">
             <label for="name">Customer name</label><br>
-            <input type="text" id="name" th:field="*{customerCreateDto.name}" class="form-control bg-dark text-white text-start"><br>
-            <p th:if="${#fields.hasErrors('customerCreateDto.name')}" style="color:red"> Invalid name</p>
+            <input type="text" id="name" th:field="*{name}" class="form-control bg-dark text-white text-start"><br>
+            <p th:if="${#fields.hasErrors('name')}" style="color:red"> Invalid name</p>
 
             <select class="form-control" id="dropDownList">
                 <option value="0">Prefix</option>
@@ -26,8 +26,8 @@
             <p th:if="${#fields.hasErrors('prefix')}" style="color:red"> Invalid prefix</p>
 
             <label for="phoneNumber">Phone number</label><br>
-            <input type="text" id="phoneNumber" th:field="*{customerCreateDto.phoneNumber}" class="form-control bg-dark text-white text-start"><br>
-            <p th:if="${#fields.hasErrors('customerCreateDto.phoneNumber')}" style="color:red"> Invalid phone number</p>
+            <input type="text" id="phoneNumber" th:field="*{phoneNumber}" class="form-control bg-dark text-white text-start"><br>
+            <p th:if="${#fields.hasErrors('phoneNumber')}" style="color:red"> Invalid phone number</p>
 
             <div class="d-flex flex-row justify-content-between" style="margin-top:20px">
                 <button type="button" class="btn btn-secondary" onclick="window.location.href='/mvc/customers'"><i class="bi bi-arrow-left" style="margin-right:5px"></i>Back</button>

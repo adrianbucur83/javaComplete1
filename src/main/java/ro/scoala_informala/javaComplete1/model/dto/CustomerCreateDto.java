@@ -11,7 +11,6 @@ import ro.scoala_informala.javaComplete1.model.Customer;
 @Getter
 @Setter
 @NoArgsConstructor
-@Setter
 public class CustomerCreateDto {
     @NotNull
     @Pattern(regexp = "^[a-zA-Z\\s]+$")
