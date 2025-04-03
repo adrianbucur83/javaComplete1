@@ -28,5 +28,8 @@ public class CerinteFinalDeCurs {
     * */
 
 
+//    Incercand sa fac X
+//    Ma astept sa se intample Y
+//    Dar se intampla Z
 
 }
